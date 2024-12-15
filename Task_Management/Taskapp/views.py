@@ -40,6 +40,7 @@ def create_task(request):
 from django.shortcuts import get_object_or_404
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def get_task(request, id):
     task = get_object_or_404(Task, pk=id)
     return Response({
@@ -53,6 +54,7 @@ def get_task(request, id):
 
 #PUT /api/tasks/{id}: Update an existing task
 @api_view(['PUT'])
+@permission_classes([IsAuthenticated])
 def update_task(request, id):
     task = get_object_or_404(Task, pk=id)
     data = request.data
@@ -78,6 +80,7 @@ def update_task(request, id):
 #DELETE /api/tasks/{id}: Delete a specific task
 
 @api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
 def delete_task(request, id):
     task = get_object_or_404(Task, pk=id)
     task.delete()
